@@ -2,149 +2,50 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
+
     public function index(){
-        $a = 0;
-        $b = null;
-
-        echo 'ini adalah '.$a.', ini adalah '. $b ;
-
-        if ($a == null){
-            echo 'nilai sama';
-        }else{
-            echo 'nilai berbeda';
-        }
-    }
-
-    public function fuzzy(){
-        $data =[
-            21,
-            5, 
-            6,
-            30,
-        ];
-
-        //Fuzzifikasi
-        for ($i=0; $i < count($data) ; $i++) { 
-            $fk[$i] = [
-                'nogejala' => $this->fungsiKeanggotaan($data[$i],'nogejala'),
-                'ringan' => $this->fungsiKeanggotaan($data[$i],'ringan'),
-                'berat' => $this->fungsiKeanggotaan($data[$i],'berat')
-            ];
-            // echo '<hr>'.'Fungsi keanggotaan gejala ke '. $i .', dengan input = '.$data[$i].'<hr>';
-            // echo 'Tanpa gejala = ' . $fk[$i]['nogejala'].'<br>';
-            // echo 'Ringan = ' . $fk[$i]['ringan'] . '<br>';
-            // echo 'Berat = ' . $fk[$i]['berat'] . '<br><br>';
+        if ($this->session->userdata('email')) {
+            redirect('dashboard');
         }
 
-        //Deffuzifikasi
-        $this->deffuzifikasi($fk);
-    }
-
-    // Menentukan fungsi keanggotaan
-    public function fungsiKeanggotaan($input,$tingkat){
-        if ($tingkat == 'nogejala') {
-            if ($input <= 5) {
-                return 1;
-            }elseif(5 < $input && $input <= 6){
-                return (6-$input)/(6-5);
-            }else{
-                return 'KOSONG';
-            }
-        }elseif ($tingkat == 'ringan'){
-            if($input == 5){
-                return 0;
-            }elseif(5 < $input && $input < 6){
-                return ($input-5)/(6-5);
-            }elseif(6 <= $input && $input<=25){
-                return 1;
-            }elseif(25 < $input && $input<=70){
-                return (70-$input)/(70-25);
-            }else{
-                return 'KOSONG';
-            }
-        }elseif($tingkat == 'berat'){
-            if($input == 25){
-                return 0;
-            }elseif(25< $input && $input<70){
-                return ($input-25)/(70-25);
-            }elseif(70<=$input){
-                return 1;
-            }else{
-                return 'KOSONG';
-            }
-        }
-    }
-
-    public function deffuzifikasi($fk){
-        for ($i=0; $i < 4; $i++) { 
-            $rule[$i] = [
-                $fk[$i]['nogejala'],
-                $fk[$i]['ringan'],
-                $fk[$i]['berat'],
-            ];
-
-            for ($j=0; $j < count($rule[$i]); $j++) {
-                for ($k=0; $k <3 ; $k++) { 
-                    for ($l=0; $l < 3; $l++) { 
-                        for ($m=0; $m < 3; $m++) { 
-                            // $aturan[] = 'Data ke = '. $rule[$i]. ' Yaitu ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
-                            if ($rule[$i][$j] == 'KOSONG') {
-                                $rule[$i][$j] = 999;
-                            }elseif ($rule[$i][$k] == 'KOSONG'){
-                                $rule[$i][$k] = 999;
-                            }elseif ($rule[$i][$l] == 'KOSONG'){
-                                $rule[$i][$l] = 999;
-                            }elseif ($rule[$i][$m] == 'KOSONG'){
-                                $rule[$i][$m] = 999;
-                            }
-                            
-                            $aturan[] = min($rule[$i][$j], $rule[$i][$k], $rule[$i][$l], $rule[$i][$m]);
-                            // echo 'Data ke '. $i.  ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
-
-                        }
-                    }
-                }
-            }
-        }
-        echo count($aturan) . '<hr>';
-        for ($i=0; $i < count($aturan); $i++) { 
-            echo $aturan[$i].'<br>';
-        }
-        // return $fk[3]['ringan'];
-    }
-
-    public function coba(){
-        $data = [
-            'satu',
-            'dua',
-            'tiga',
-            'empat',
-        ];
+        //form validation
+        $this->form_validation->set_rules('email', 'Email', 'required|trim');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
         
+        //Ketika ada eksekusi form
+		if ($this->form_validation->run() == false) {
+			$this->load->view('auth/auth-login');
+		}else{
+			//validasinya sukses
+			$this->_login();
+		}
+    }
 
-        //Menentukan kombinasi
-        for ($i=0; $i < count($data); $i++) { 
-            $rule[$i] = [
-                'A',
-                'B',
-                'C',
+    public function _login(){
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        // $this->db->insert('user', ['email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)]);
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+
+        // var_dump($user);
+        if ($user['email']==$email && $user['password'] == $password) {
+            $data = [
+                'email' => $user['email'],
             ];
-
-            for ($j=0; $j < count($rule[$i]); $j++) {
-                for ($k=0; $k <3 ; $k++) { 
-                    for ($l=0; $l < 3; $l++) { 
-                        for ($m=0; $m < 3; $m++) { 
-                            $aturan[] = 'Data ke = '. $data[$i]. ' Yaitu ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
-                            echo 'Data ke '. $data[$i]. ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
-                        }
-                    }
-                }
-            }
+            $this->session->set_userdata($data);
+            redirect('dashboard');
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Your email or password is wrong!</div>');
+            redirect('auth/login');
         }
-        echo count($aturan);
-        // for ($i=0; $i < count($aturan); $i++) { 
-        //     echo $aturan[$i].'<br>';
-        // }
-        // var_dump($rule);
+    }
+
+    public function logout(){
+        $this->session->unset_userdata('email');
+
+		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">You have been logged out!</div>');
+		redirect('auth/login');
     }
 }
