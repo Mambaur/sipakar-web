@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
     public function index(){
-        redirect('auth/login');
+        echo 'i am home';
     }
 
     public function fuzzy(){
@@ -79,17 +79,19 @@ class Home extends CI_Controller {
                     for ($l=0; $l < 3; $l++) { 
                         for ($m=0; $m < 3; $m++) { 
                             // $aturan[] = 'Data ke = '. $rule[$i]. ' Yaitu ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
-                            if ($rule[$i][$j] == 'KOSONG') {
-                                $rule[$i][$j] = 999;
-                            }elseif ($rule[$i][$k] == 'KOSONG'){
-                                $rule[$i][$k] = 999;
-                            }elseif ($rule[$i][$l] == 'KOSONG'){
-                                $rule[$i][$l] = 999;
-                            }elseif ($rule[$i][$m] == 'KOSONG'){
-                                $rule[$i][$m] = 999;
-                            }
+                            // if ($rule[$i][$j] == 'KOSONG') {
+                            //     $rule[$i][$j] = 999;
+                            // }elseif ($rule[$i][$k] == 'KOSONG'){
+                            //     $rule[$i][$k] = 999;
+                            // }elseif ($rule[$i][$l] == 'KOSONG'){
+                            //     $rule[$i][$l] = 999;
+                            // }elseif ($rule[$i][$m] == 'KOSONG'){
+                            //     $rule[$i][$m] = 999;
+                            // }
                             
-                            $aturan[] = min($rule[$i][$j], $rule[$i][$k], $rule[$i][$l], $rule[$i][$m]);
+                            // $aturan[] = min($rule[$i][$j], $rule[$i][$k], $rule[$i][$l], $rule[$i][$m]);
+                            
+                            
                             // echo 'Data ke '. $i.  ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
 
                         }
@@ -97,10 +99,10 @@ class Home extends CI_Controller {
                 }
             }
         }
-        echo count($aturan) . '<hr>';
-        for ($i=0; $i < count($aturan); $i++) { 
-            echo $aturan[$i].'<br>';
-        }
+        // echo count($aturan) . '<hr>';
+        // for ($i=0; $i < count($aturan); $i++) { 
+        //     echo $aturan[$i].'<br>';
+        // }
         // return $fk[3]['ringan'];
     }
 
@@ -121,10 +123,28 @@ class Home extends CI_Controller {
                 'C',
             ];
 
+            // $rule[$i] = [
+            //     'Tidak ada gejala',
+            //     'Ringan',
+            //     'Berat',
+            // ];
+
             for ($j=0; $j < count($rule[$i]); $j++) {
                 for ($k=0; $k <3 ; $k++) { 
                     for ($l=0; $l < 3; $l++) { 
                         for ($m=0; $m < 3; $m++) { 
+
+                            $datainsert = [
+                                'nomor_rule' => $n++,
+                                'fungsi_keanggotaan_1' => $rule[$i][$j],
+                                'fungsi_keanggotaan_2' => $rule[$i][$k],
+                                'fungsi_keanggotaan_3' => $rule[$i][$l],
+                                'fungsi_keanggotaan_4' => $rule[$i][$m],
+                                'cf_pakar' => 0,
+                                'role_penyakit' => '1',
+                            ];
+                            $this->db->insert('rules_lanas', $datainsert);
+
                             $aturan[] = 'Data ke = '. $data[$i]. ' Yaitu ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
                             echo 'Data ke '. $data[$i]. ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
                         }
