@@ -2,7 +2,7 @@
 
   
 
-    <div id="content-wrapper">
+<div id="content-wrapper">
 
 <div class="container-fluid">
 
@@ -14,59 +14,59 @@
     <li class="breadcrumb-item active">Rule Lanas</li>
   </ol>
 
-  
-
   <!-- DataTables Example -->
-  <div class="card mb-3">
-    <div class="card-header">
-      <i class="fas fa-table"></i>
-      Data Table Example</div>
-    <div class="card-body">
-        <form action="<?= base_url(); ?>rules/lanas/update" method="post">
-            <button type="submit" class="btn btn-primary my-3 px-4">Perbarui</button>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                    <th>Nomor Rules</th>
-                    <th>Gejala 1</th>
-                    <th>Gejala 2</th>
-                    <th>Gejala 3</th>
-                    <th>Gejala 4</th>
-                    <th>Cf Pakar</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                    <th>Nomor Rules</th>
-                    <th>Gejala 1</th>
-                    <th>Gejala 2</th>
-                    <th>Gejala 3</th>
-                    <th>Gejala 4</th>
-                    <th>Cf Pakar</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                <?php  
-                    foreach ($rules as $item) {
-                ?>
-                    <tr>
-                    <td><?= $item['nomor_rule']; ?></td>
-                    <td><?= $item['fungsi_keanggotaan_1']; ?></td>
-                    <td><?= $item['fungsi_keanggotaan_2']; ?></td>
-                    <td><?= $item['fungsi_keanggotaan_3']; ?></td>
-                    <td><?= $item['fungsi_keanggotaan_4']; ?></td>
-                    <td><input name="<?= $item['nomor_rule']; ?>" type="text" value="<?= $item['cf_pakar']; ?>"></td>
-                    </tr>
-                <?php } ?>
-                
-                </tbody>
-                </table>
-            </div>
-        </form>
+  <form action="<?= base_url(); ?>rules/lanas_update" method="post">
+    <?= $this->session->flashdata('message'); ?>
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Data Rules Penyakit Lanas</div>
+      <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                <th>Nomor Rules</th>
+                <th>Gejala 1</th>
+                <th>Gejala 2</th>
+                <th>Gejala 3</th>
+                <th>Gejala 4</th>
+                <th>Cf Pakar</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                <th>Nomor Rules</th>
+                <th>Gejala 1</th>
+                <th>Gejala 2</th>
+                <th>Gejala 3</th>
+                <th>Gejala 4</th>
+                <th>Cf Pakar</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            <?php  
+                foreach ($rules as $item) {
+            ?>
+                <tr>
+                <td><?= $item['nomor_rule']; ?></td>
+                <td><?= $item['fungsi_keanggotaan_1']; ?></td>
+                <td><?= $item['fungsi_keanggotaan_2']; ?></td>
+                <td><?= $item['fungsi_keanggotaan_3']; ?></td>
+                <td><?= $item['fungsi_keanggotaan_4']; ?></td>
+                <td><input name="<?= $item['nomor_rule']; ?>" type="number" min="0" step="any" value="<?= $item['cf_pakar']; ?>" required></td>
+                </tr>
+            <?php } ?>
+            <button type="submit" class="btn btn-success mb-2 px-4">Perbarui</button>
+            <a href="<?= base_url();?>rules?indication=layubakteri" class="btn btn-outline-secondary ml-1 mb-2">Rules layu bakteri</a>
+          </tbody>
+            </table>
+        </div>
+      </div>
     </div>
-    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-  </div>
-
+    <div class="container text-center my-3">
+      <button type="submit" class="btn btn-success mb-2 px-5">Perbarui</button>
+    </div>
+  </form>
 </div>
 <!-- /.container-fluid -->
