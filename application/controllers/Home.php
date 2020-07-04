@@ -2,16 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
+    
     public function index(){
-        echo 'i am home';
+        $this->fuzzy();
     }
 
     public function fuzzy(){
         $data =[
-            21,
-            5, 
-            6,
-            30,
+            100,
+            100, 
+            100,
+            100,
         ];
 
         //Fuzzifikasi
@@ -39,6 +40,7 @@ class Home extends CI_Controller {
             }elseif(5 < $input && $input <= 6){
                 return (6-$input)/(6-5);
             }else{
+                //tidak ada gejala
                 return 'KOSONG';
             }
         }elseif ($tingkat == 'ringan'){
@@ -51,6 +53,7 @@ class Home extends CI_Controller {
             }elseif(25 < $input && $input<=70){
                 return (70-$input)/(70-25);
             }else{
+                //tidak ada gejala
                 return 'KOSONG';
             }
         }elseif($tingkat == 'berat'){
@@ -61,12 +64,14 @@ class Home extends CI_Controller {
             }elseif(70<=$input){
                 return 1;
             }else{
+                //tidak ada gejala
                 return 'KOSONG';
             }
         }
     }
 
     public function deffuzifikasi($fk){
+        $n = 0;
         for ($i=0; $i < 4; $i++) { 
             $rule[$i] = [
                 $fk[$i]['nogejala'],
@@ -78,32 +83,45 @@ class Home extends CI_Controller {
                 for ($k=0; $k <3 ; $k++) { 
                     for ($l=0; $l < 3; $l++) { 
                         for ($m=0; $m < 3; $m++) { 
-                            // $aturan[] = 'Data ke = '. $rule[$i]. ' Yaitu ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
-                            // if ($rule[$i][$j] == 'KOSONG') {
-                            //     $rule[$i][$j] = 999;
-                            // }elseif ($rule[$i][$k] == 'KOSONG'){
-                            //     $rule[$i][$k] = 999;
-                            // }elseif ($rule[$i][$l] == 'KOSONG'){
-                            //     $rule[$i][$l] = 999;
-                            // }elseif ($rule[$i][$m] == 'KOSONG'){
-                            //     $rule[$i][$m] = 999;
-                            // }
                             
-                            // $aturan[] = min($rule[$i][$j], $rule[$i][$k], $rule[$i][$l], $rule[$i][$m]);
+                            if ($rule[$i][$j] == 'KOSONG') {
+                                $rule[$i][$j] = 1;
+                            }elseif ($rule[$i][$k] == 'KOSONG'){
+                                $rule[$i][$k] = 1;
+                            }elseif ($rule[$i][$l] == 'KOSONG'){
+                                $rule[$i][$l] = 1;
+                            }elseif ($rule[$i][$m] == 'KOSONG'){
+                                $rule[$i][$m] = 1;
+                            }
+
+                            // untuk mencari total rule dengan membuat array di $aturan
+                            $aturan[] = 'Data ke '. $n++.  ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
                             
+                            //Mencari nilai minimal setiap fungsikeanggotaan rule
+                            $min = min($rule[$i][$j], $rule[$i][$k], $rule[$i][$l], $rule[$i][$m]);
                             
-                            // echo 'Data ke '. $i.  ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<hr>';
+                            $cf_pakar = $this->db->get_where('rules_lanas', ['nomor_rule' => $n])->row_array();
+                            
+                            // echo 'Data ke '. $n.  ' = ' . $rule[$i][$j] . ' and '. $rule[$i][$k]. ' and '. $rule[$i][$l]. ' and '. $rule[$i][$m].'<br>';
+                            // echo 'Min rule ke '.$n .' = '.$min.'<br>';
+                            // echo 'Ini adalah nilai CF Pakar = '. $cf_pakar['cf_pakar'].'<hr><br><br>';
+
+                            $zi[] = $min * $cf_pakar['cf_pakar'];
+                            $pakar[]= $cf_pakar['cf_pakar'];
 
                         }
                     }
                 }
             }
         }
+
+        //menampilkan nilai minimal dan total rule
         // echo count($aturan) . '<hr>';
-        // for ($i=0; $i < count($aturan); $i++) { 
-        //     echo $aturan[$i].'<br>';
-        // }
-        // return $fk[3]['ringan'];
+        $zdeff = array_sum($zi);
+        $zp = array_sum($pakar);
+
+        $z = $zdeff/$zp;
+        echo $zdeff . ' / ' . $zp .' = '.$z.'<br>'; 
     }
 
     public function coba(){
