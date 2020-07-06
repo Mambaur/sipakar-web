@@ -17,6 +17,8 @@ class Rules extends CI_Controller {
             $this->layubakteri();
         }else if($this->input->get('indication') == 'keriting'){
             $this->keriting();
+        }else if($this->input->get('indication') == 'mosaik'){
+            $this->mosaik();
         }else{
             redirect('nopage');
         }       
@@ -50,21 +52,28 @@ class Rules extends CI_Controller {
 
     //Layu Bakteri Indication rules
     public function layubakteri(){
-
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        // $this->load->view('rules/rule-lanas-view', $data);
+        $this->load->view('rules/rule-layu-view');
         $this->load->view('widgets/footer-widget');
     }
     
     //Keriting Indication rules
     public function keriting(){
-
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        // $this->load->view('rules/rule-lanas-view', $data);
+        $this->load->view('rules/rule-keriting-view');
+        $this->load->view('widgets/footer-widget');
+    }
+
+    //Keriting Indication rules
+    public function mosaik(){
+        $this->load->view('widgets/header-widget');
+        $this->load->view('widgets/navbar-widget');
+        $this->load->view('widgets/sidebar-widget');
+        $this->load->view('rules/rule-mosaik-view');
         $this->load->view('widgets/footer-widget');
     }
 }

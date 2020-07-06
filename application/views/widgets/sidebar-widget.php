@@ -17,17 +17,33 @@
           <a class="dropdown-item" href="<?= base_url();?>rules?indication=lanas">Lanas</a>
           <a class="dropdown-item" href="<?= base_url();?>rules?indication=layubakteri">Layu Bakteri</a>
           <a class="dropdown-item" href="<?= base_url();?>rules?indication=keriting">Keriting</a>
+          <a class="dropdown-item" href="<?= base_url();?>rules?indication=mosaik">Mosaik</a>
           <div class="dropdown-divider"></div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url(); ?>tembakau?link=gejala">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+          <span>Gejala</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?= base_url(); ?>tembakau?link=penyakit">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>Penyakit</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>account">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Akun</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>tembakau?link=info">
+          <i class="fas fa-fw fa-info"></i>
+          <span>Tentang tembakau</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" data-toggle="modal" data-target="#logoutModal">
+          <i class="fas fa-fw fa-sign-out-alt"></i>
+          <span>Keluar</span></a>
       </li>
     </ul>

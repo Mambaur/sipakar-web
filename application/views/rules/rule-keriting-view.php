@@ -11,16 +11,16 @@
     <li class="breadcrumb-item">
       <a href="#">Dashboard</a>
     </li>
-    <li class="breadcrumb-item active">Rule Lanas</li>
+    <li class="breadcrumb-item active">Rule Keriting</li>
   </ol>
 
   <!-- DataTables Example -->
-  <form action="<?= base_url(); ?>rules/lanas_update" method="post">
+  <form action="" method="post">
     <?= $this->session->flashdata('message'); ?>
     <div class="card mb-3">
       <div class="card-header">
         <i class="fas fa-table"></i>
-        Data Rules Penyakit Lanas</div>
+        Data Rules Penyakit Keriting</div>
       <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
@@ -45,7 +45,7 @@
                 </tr>
             </tfoot>
             <tbody>
-            <?php  
+            <!-- <?php  
                 foreach ($rules as $item) {
             ?>
                 <tr>
@@ -56,10 +56,10 @@
                 <td><?= $item['fungsi_keanggotaan_4']; ?></td>
                 <td><input name="<?= $item['nomor_rule']; ?>" type="number" min="0" step="any" value="<?= $item['cf_pakar']; ?>" required></td>
                 </tr>
-            <?php } ?>
-            <a href="<?= base_url();?>rules?indication=lanas" class="btn btn-success ml-1 mb-2">Lanas</a>
+            <?php } ?> -->
+            <a href="<?= base_url();?>rules?indication=lanas" class="btn btn-outline-secondary ml-1 mb-2">Lanas</a>
             <a href="<?= base_url();?>rules?indication=layubakteri" class="btn btn-outline-secondary ml-1 mb-2">Layu bakteri</a>
-            <a href="<?= base_url();?>rules?indication=keriting" class="btn btn-outline-secondary ml-1 mb-2">Keriting</a>
+            <a href="<?= base_url();?>rules?indication=keriting" class="btn btn-success ml-1 mb-2">Keriting</a>
             <a href="<?= base_url();?>rules?indication=mosaik" class="btn btn-outline-secondary ml-1 mb-2">Mosaik</a>
           </tbody>
             </table>
