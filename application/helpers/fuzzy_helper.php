@@ -1,13 +1,7 @@
 <?php 
 
-function lanas_identification(){
+function lanas_identification($data){
     $instance = get_instance();
-    $data =[
-        60,
-        75, 
-        90,
-        0,
-    ];
 
     //Fuzzifikasi
     for ($i=0; $i < count($data) ; $i++) { 
@@ -19,7 +13,8 @@ function lanas_identification(){
     }
 
     //Deffuzifikasi
-    echo json_encode(lanas_deffuzifikasi($fk));
+    // echo json_encode(lanas_deffuzifikasi($fk));
+    return json_encode(lanas_deffuzifikasi($fk));
 }
 
 // Menentukan fungsi keanggotaan
@@ -86,10 +81,10 @@ function lanas_deffuzifikasi($fk){
 
                         $resultRule[] = [
                             'nomor_rule' => $n,
-                            'fungsi_keanggotaan_gejala 1' => $rule[0][$j],
-                            'fungsi_keanggotaan_gejala 2' => $rule[1][$k],
-                            'fungsi_keanggotaan_gejala 3' => $rule[2][$l],
-                            'fungsi_keanggotaan_gejala 4' => $rule[3][$m],
+                            'fungsi_keanggotaan_gejala_1' => $rule[0][$j],
+                            'fungsi_keanggotaan_gejala_2' => $rule[1][$k],
+                            'fungsi_keanggotaan_gejala_3' => $rule[2][$l],
+                            'fungsi_keanggotaan_gejala_4' => $rule[3][$m],
                             'nilai_minimal' => $min,
                             'cf_pakar' => (double)$cf_pakar['cf_pakar']
                         ];
@@ -131,6 +126,7 @@ function lanas_certainty($z, $pakar, $resultRule){
 
     $result =[
         'status' => 1,
+        'penyakit' => 'lanas',
         'rule' =>$resultRule,
         'nilai_z' => $z,
         'cf_he' => $CFhe,

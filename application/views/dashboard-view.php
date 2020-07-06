@@ -85,49 +85,40 @@
         
 
         <!-- DataTables Example -->
+        <?= $this->session->flashdata('message'); ?>
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Ayo mulai identifikasi penyakit tembakau sekarang!</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th style="width:5%;"></th>
-                    <th>Nama gejala</th>
-                    <th class="w-25 text-center">Berat serangan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-                  foreach ($gejala as $item) {?>
+            Ayo mulai identifikasi penyakit tembakau sekarang!
+          </div>
+          <form action="<?= base_url();?>dashboard?start=identification" method="post">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                  <thead>
                     <tr>
-                      <td class="text-center"><input name='check' type="checkbox"></td>
-                      <td><?= $item['nama_gejala']; ?></td>
-                      <td class="text-center"><input class="w-75" type="number" min="0" max="100" value="0"> %</td>
+                      <th style="width:5%;"></th>
+                      <th>Nama gejala</th>
+                      <th class="w-25 text-center">Berat serangan</th>
                     </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
-              <div class="container text-center">
-                <a href="" style="border-radius:40px;" class="btn btn-success py-3 px-5">Mulai Identifikasi</a>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    foreach ($gejala as $item) {?>
+                      <tr>
+                        <td class="text-center"><input name='check' type="checkbox"></td>
+                        <td><?= $item['nama_gejala']; ?></td>
+                        <td class="text-center"><input class="w-75" type="number" name="<?= $item['idgejala']; ?>" min="0" max="100" value="0"> %</td>
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                <div class="container text-center">
+                  <button type="submit" style="border-radius:40px;" class="btn btn-success py-3 px-5"><i class="fas fa-fw fa-hourglass-start"></i> Mulai Identifikasi</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          </form>
         </div>
-
-        <!-- Area Chart Example-->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-chart-area"></i>
-            Area Chart Example</div>
-          <div class="card-body">
-            <canvas id="myAreaChart" width="100%" height="30"></canvas>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
-
       </div>
       <!-- /.container-fluid -->

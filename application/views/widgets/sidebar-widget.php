@@ -32,14 +32,14 @@
           <span>Penyakit</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>account">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Akun</span></a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>tembakau?link=info">
           <i class="fas fa-fw fa-info"></i>
           <span>Tentang tembakau</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>account">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Akun</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="" data-toggle="modal" data-target="#logoutModal">
