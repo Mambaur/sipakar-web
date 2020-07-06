@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
     
     public function index(){
-        $this->fuzzy();
+        lanas_identification();
+        // $this->fuzzy();
     }
 
     public function fuzzy(){
@@ -78,18 +79,9 @@ class Home extends CI_Controller {
                 $fk[$i]['ringan'],
                 $fk[$i]['berat'],
             ];
-            // $rule[$i] = [
-            //     'Tidak ada gejala',
-            //     'Ringan',
-            //     'Berat',
-            // ];
         }
-        // echo json_encode($rule);
-        // var_dump(json_encode($rule));
-        // die;
-        $a=0;
-        for ($j=0; $j < 3; $j++) {
 
+        for ($j=0; $j < 3; $j++) {
             for ($k=0; $k <3 ; $k++) { 
                 for ($l=0; $l < 3; $l++) { 
                     for ($m=0; $m < 3; $m++) { 
@@ -113,10 +105,6 @@ class Home extends CI_Controller {
                                 'rule[2]['.$l.']',
                                 'rule[3]['.$m.']',
                             ];
-
-                            // untuk mencari total rule dengan membuat array di $aturan
-                            $aturan[] = 'Data ke '. $n.  ' = '.$teswoy[0].' = '. $rule[0][$j] . ' and '. $teswoy[1].' = '.$rule[1][$k]. ' and '. $teswoy[2].' = '.$rule[2][$l]. ' and '. $teswoy[3].' = '.$rule[3][$m].'<hr>';
-                        
                         
                             //Mencari nilai minimal setiap fungsikeanggotaan rule
                             $min = min($rule[0][$j], $rule[1][$k], $rule[2][$l], $rule[3][$m]);
@@ -126,6 +114,8 @@ class Home extends CI_Controller {
                             echo 'Data ke '. $n.  ' = '.$teswoy[0].' = '. $rule[0][$j] . ' and '. $teswoy[1].' = '.$rule[1][$k]. ' and '. $teswoy[2].' = '.$rule[2][$l]. ' and '. $teswoy[3].' = '.$rule[3][$m].'<hr>';
                             echo 'Min rule ke '.$n .' = '.$min.'<br>';
                             echo 'Ini adalah nilai CF Pakar = '. $cf_pakar['cf_pakar'].'<hr><br><br>';
+
+
                             $zi[] = $min * $cf_pakar['cf_pakar'];
                             $pakar[]= $cf_pakar['cf_pakar'];
                         }
@@ -134,14 +124,15 @@ class Home extends CI_Controller {
                 }
             }
         }
-        // echo count($aturan);
-        //menampilkan nilai minimal dan total rule
+        
+        //Menghitung rumus deffuzifikasi
         $zdeff = array_sum($zi);
         $zp = array_sum($pakar);
 
         $z = $zdeff/$zp;
         echo $zdeff . ' / ' . $zp .' = '.$z.'<br>'; 
 
+        //Kombinasi dengan certainty factor
         $this->certainty($z, $pakar);
     }
 
@@ -163,6 +154,11 @@ class Home extends CI_Controller {
         // echo 'CF combine = '.$CFcombine;
     }
 
+
+
+
+
+    //Rumus kombinasi untuk penyakit dengan 4 gejala
     public function coba(){
         $n = 0;
         $data = [
@@ -175,45 +171,41 @@ class Home extends CI_Controller {
 
         //Menentukan kombinasi
         for ($i=0; $i < count($data); $i++) { 
-            // $rule[$i] = [
-            //     'A',
-            //     'B',
-            //     'C',
-            // ];
             $rule[$i] = [
-                'Tidak ada gejala',
-                'Ringan',
-                'Berat',
+                'A',
+                'B',
+                'C',
             ];
+            // $rule[$i] = [
+            //     'Tidak ada gejala',
+            //     'Ringan',
+            //     'Berat',
+            // ];
         }
 
         for ($j=0; $j < count($rule[$j]); $j++) {
-            for ($k=0; $k <3 ; $k++) { 
-                for ($l=0; $l < 3; $l++) { 
-                    for ($m=0; $m < 3; $m++) { 
+            for ($k=0; $k <count($rule[$k]) ; $k++) { 
+                for ($l=0; $l < count($rule[$l]); $l++) { 
+                    for ($m=0; $m < count($rule[$m]); $m++) { 
                         $n++;
-                        $datainsert = [
-                            'nomor_rule' => $n,
-                            'fungsi_keanggotaan_1' => $rule[$j][$j],
-                            'fungsi_keanggotaan_2' => $rule[$j][$k],
-                            'fungsi_keanggotaan_3' => $rule[$j][$l],
-                            'fungsi_keanggotaan_4' => $rule[$j][$m],
-                            'cf_pakar' => 0,
-                            'role_penyakit' => '1',
-                        ];
-                        $this->db->insert('rules_lanas', $datainsert);
+                        // $datainsert = [
+                        //     'nomor_rule' => $n,
+                        //     'fungsi_keanggotaan_1' => $rule[$j][$j],
+                        //     'fungsi_keanggotaan_2' => $rule[$j][$k],
+                        //     'fungsi_keanggotaan_3' => $rule[$j][$l],
+                        //     'fungsi_keanggotaan_4' => $rule[$j][$m],
+                        //     'cf_pakar' => 0,
+                        //     'role_penyakit' => '1',
+                        // ];
+                        // $this->db->insert('rules_lanas', $datainsert);
 
-                        $aturan[] = 'Data ke = '. $n. ' Yaitu ' . $rule[$j][$j] . ' and '. $rule[$j][$k]. ' and '. $rule[$j][$l]. ' and '. $rule[$j][$m].'<hr>';
-                        echo 'Data ke '. $n. ' = ' . $rule[$j][$j] . ' and '. $rule[$j][$k]. ' and '. $rule[$j][$l]. ' and '. $rule[$j][$m].'<hr>';
+                        echo 'Data ke '. $n.  ' = '. $rule[0][$j] . ' and '.$rule[1][$k]. ' and '.$rule[2][$l]. ' and '. $rule[3][$m].'<hr>';
+
+                        // $aturan[] = 'Data ke = '. $n. ' Yaitu ' . $rule[$j][$j] . ' and '. $rule[$j][$k]. ' and '. $rule[$j][$l]. ' and '. $rule[$j][$m].'<hr>';
+                        // echo 'Data ke '. $n. ' = ' . $rule[$j][$j] . ' and '. $rule[$j][$k]. ' and '. $rule[$j][$l]. ' and '. $rule[$j][$m].'<hr>';
                     }
                 }
             }
         }
-        
-        echo count($aturan);
-        // for ($i=0; $i < count($aturan); $i++) { 
-        //     echo $aturan[$i].'<br>';
-        // }
-        // var_dump($rule);
     }
 }

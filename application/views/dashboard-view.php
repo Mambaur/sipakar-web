@@ -22,10 +22,10 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">26 New Messages!</div>
+                <div class="mr-5"><?= count($this->db->get('gejala')->result_array()); ?> Total Gejala!</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+              <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>tembakau?link=gejala">
+                <span class="float-left">Lihat Detail</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
@@ -38,10 +38,10 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">11 New Tasks!</div>
+                <div class="mr-5"><?= count($this->db->get('penyakit')->result_array()); ?> Jumlah Penyakit!</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+              <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>tembakau?link=penyakit">
+                <span class="float-left">Lihat Detail</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
@@ -54,10 +54,10 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">123 New Orders!</div>
+                <div class="mr-5"><?= count($this->db->get_where('user', ['role' => 'user'])->result_array()); ?> User aktif!</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+                <span class="float-left">Lihat Detail</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
@@ -70,16 +70,52 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5">13 New Tickets!</div>
+                <div class="mr-5"><?= count($this->db->get('rules_lanas')->result_array()); ?> Total Rule!</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+              <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>rules?indication=lanas">
+                <span class="float-left">Lihat Detail</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
               </a>
             </div>
           </div>
+        </div>
+
+        
+
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Ayo mulai identifikasi penyakit tembakau sekarang!</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th style="width:5%;"></th>
+                    <th>Nama gejala</th>
+                    <th class="w-25 text-center">Berat serangan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  foreach ($gejala as $item) {?>
+                    <tr>
+                      <td class="text-center"><input name='check' type="checkbox"></td>
+                      <td><?= $item['nama_gejala']; ?></td>
+                      <td class="text-center"><input class="w-75" type="number" min="0" max="100" value="0"> %</td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <div class="container text-center">
+                <a href="" style="border-radius:40px;" class="btn btn-success py-3 px-5">Mulai Identifikasi</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
 
         <!-- Area Chart Example-->
@@ -89,50 +125,6 @@
             Area Chart Example</div>
           <div class="card-body">
             <canvas id="myAreaChart" width="100%" height="30"></canvas>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
-
-        <!-- DataTables Example -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            Data Table Example</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>

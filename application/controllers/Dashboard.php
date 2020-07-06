@@ -10,10 +10,11 @@ class Dashboard extends CI_Controller {
     }
     
     public function index(){
+        $data['gejala'] = $this->db->get('gejala')->result_array();
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        $this->load->view('dashboard-view');
+        $this->load->view('dashboard-view', $data);
         $this->load->view('widgets/footer-widget');
     }
 }
