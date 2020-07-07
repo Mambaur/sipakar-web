@@ -23,7 +23,7 @@
 </head>
 
 <body id="page-top">
-    <div id="content-wrapper">
+    <div class="text-center mt-5">
 
       <div class="container-fluid">
 
@@ -32,20 +32,10 @@
         <p class="lead">Page not found. You can
           <a href="javascript:history.back()">go back</a>
           to the previous page, or
-          <a href="index.html">return home</a>.</p>
+          <a href="<?= base_url();?>dashboard">return home</a>.</p>
 
       </div>
       <!-- /.container-fluid -->
-
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © Sipakar Tembakau 2020</span>
-          </div>
-        </div>
-      </footer>
-
     </div>
     <!-- /.content-wrapper -->
 

@@ -46,10 +46,10 @@ $persentase = $hasil['hasil_kombinasi'] * 100;
                                         <a href="#" style="border-radius:40px;" class="btn btn-outline-success py-3 px-5 mb-4 mt-3">Persentase Berat Penyakit <strong><?= (int)$persentase; ?></strong>%</a>
                                     </div>
                                 </div>
-                                <div class="text-dark py-4 px-3 text-left" style="border-radius:10px;background-color:#EBEEF9;">
+                                <div class="py-4 px-3 text-left" style="border-radius:10px;background-color:#EBEEF9;">
                                     <p>
-                                        <strong>Total nilai z </strong><?= $hasil['nilai_z']; ?><hr>
-                                        <strong>Hasil kombinasi cf </strong> <?= $hasil['hasil_kombinasi']; ?><hr>
+                                        <strong>Total nilai z </strong><span class="badge badge-success text-light px-3 ml-2"><?= $hasil['nilai_z']; ?></span><hr>
+                                        <strong>Hasil kombinasi cf </strong> <span class="badge badge-success text-light px-3 ml-2"><?= $hasil['hasil_kombinasi']; ?></span><hr>
                                     </p>
                                 </div>
                             </div>
