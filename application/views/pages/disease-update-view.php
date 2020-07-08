@@ -8,7 +8,8 @@
     <li class="breadcrumb-item">
       <a href="#">Dashboard</a>
     </li>
-    <li class="breadcrumb-item active">Detail penyakit</li>
+    <li class="breadcrumb-item active">Penyakit</li>
+    <li class="breadcrumb-item active"><?= $penyakit['nama_penyakit']; ?></li>
   </ol>
 
   <div class="row">
@@ -20,7 +21,6 @@
             <i class="fas fa-edit"></i>
             Edit penyakit
             </div>
-            <!-- <form action="<?= base_url();?>tembakau?link=penyakit&action=update" method="post"> -->
             <?= form_open_multipart('tembakau?link=penyakit&action=update'); ?>
                 <div class="card-body">
                     <div class="form-group">

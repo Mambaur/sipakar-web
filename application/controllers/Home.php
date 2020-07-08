@@ -160,49 +160,72 @@ class Home extends CI_Controller {
 
     //Rumus kombinasi untuk penyakit dengan 4 gejala
     public function coba(){
-        $n = 0;
+        $no_rule = 0;
         $data = [
             'satu',
             'dua',
             'tiga',
             'empat',
+            'lima'
         ];
         
 
         //Menentukan kombinasi
         for ($i=0; $i < count($data); $i++) { 
-            $rule[$i] = [
-                'A',
-                'B',
-                'C',
-            ];
             // $rule[$i] = [
-            //     'Tidak ada gejala',
-            //     'Ringan',
-            //     'Berat',
+            //     'A',
+            //     'B',
+            //     'C',
             // ];
+            $rule[$i] = [
+                'Tidak ada gejala',
+                'Ringan',
+                'Berat',
+            ];
         }
+
+        // for ($j=0; $j < count($rule[$j]); $j++) {
+        //     for ($k=0; $k <count($rule[$k]) ; $k++) { 
+        //         for ($l=0; $l < count($rule[$l]); $l++) { 
+        //             for ($m=0; $m < count($rule[$m]); $m++) { 
+        //                 $n++;
+        //                 $datainsert = [
+        //                     'nomor_rule' => $n,
+        //                     'fungsi_keanggotaan_1' => $rule[0][$j],
+        //                     'fungsi_keanggotaan_2' => $rule[1][$k],
+        //                     'fungsi_keanggotaan_3' => $rule[2][$l],
+        //                     'fungsi_keanggotaan_4' => $rule[3][$m],
+        //                     'cf_pakar' => 0,
+        //                     'role_penyakit' => '4',
+        //                 ];
+        //                 $this->db->insert('rules_mosaik', $datainsert);
+
+        //                 echo 'Data ke '. $n.  ' = '. $rule[0][$j] . ' and '.$rule[1][$k]. ' and '.$rule[2][$l]. ' and '. $rule[3][$m].'<hr>';
+        //             }
+        //         }
+        //     }
+        // }
 
         for ($j=0; $j < count($rule[$j]); $j++) {
             for ($k=0; $k <count($rule[$k]) ; $k++) { 
                 for ($l=0; $l < count($rule[$l]); $l++) { 
                     for ($m=0; $m < count($rule[$m]); $m++) { 
-                        $n++;
-                        // $datainsert = [
-                        //     'nomor_rule' => $n,
-                        //     'fungsi_keanggotaan_1' => $rule[$j][$j],
-                        //     'fungsi_keanggotaan_2' => $rule[$j][$k],
-                        //     'fungsi_keanggotaan_3' => $rule[$j][$l],
-                        //     'fungsi_keanggotaan_4' => $rule[$j][$m],
-                        //     'cf_pakar' => 0,
-                        //     'role_penyakit' => '1',
-                        // ];
-                        // $this->db->insert('rules_lanas', $datainsert);
+                        for ($n=0; $n < count($rule[$n]); $n++) { 
+                            $no_rule++;
+                            $datainsert = [
+                                'nomor_rule' => $no_rule,
+                                'fungsi_keanggotaan_1' => $rule[0][$j],
+                                'fungsi_keanggotaan_2' => $rule[1][$k],
+                                'fungsi_keanggotaan_3' => $rule[2][$l],
+                                'fungsi_keanggotaan_4' => $rule[3][$m],
+                                'fungsi_keanggotaan_5' => $rule[4][$n],
+                                'cf_pakar' => 0,
+                                'role_penyakit' => '2',
+                            ];
+                            $this->db->insert('rules_layu', $datainsert);
 
-                        echo 'Data ke '. $n.  ' = '. $rule[0][$j] . ' and '.$rule[1][$k]. ' and '.$rule[2][$l]. ' and '. $rule[3][$m].'<hr>';
-
-                        // $aturan[] = 'Data ke = '. $n. ' Yaitu ' . $rule[$j][$j] . ' and '. $rule[$j][$k]. ' and '. $rule[$j][$l]. ' and '. $rule[$j][$m].'<hr>';
-                        // echo 'Data ke '. $n. ' = ' . $rule[$j][$j] . ' and '. $rule[$j][$k]. ' and '. $rule[$j][$l]. ' and '. $rule[$j][$m].'<hr>';
+                            echo 'Data ke '. $no_rule.  ' = '. $rule[0][$j] . ' and '.$rule[1][$k]. ' and '.$rule[2][$l]. ' and '. $rule[3][$m].' and '.$rule[4][$n].'<hr>';
+                        }
                     }
                 }
             }

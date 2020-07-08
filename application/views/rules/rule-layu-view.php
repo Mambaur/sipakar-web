@@ -15,7 +15,7 @@
   </ol>
 
   <!-- DataTables Example -->
-  <form action="" method="post">
+  <form action="<?= base_url(); ?>rules/layu_update" method="post">
     <?= $this->session->flashdata('message'); ?>
     <div class="card mb-3">
       <div class="card-header">
@@ -26,11 +26,12 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                <th>Nomor Rules</th>
+                <th style="width:5%">Nomor Rules</th>
                 <th>Gejala 1</th>
                 <th>Gejala 2</th>
                 <th>Gejala 3</th>
                 <th>Gejala 4</th>
+                <th>Gejala 5</th>
                 <th>Cf Pakar</th>
                 </tr>
             </thead>
@@ -41,11 +42,12 @@
                 <th>Gejala 2</th>
                 <th>Gejala 3</th>
                 <th>Gejala 4</th>
+                <th>Gejala 5</th>
                 <th>Cf Pakar</th>
                 </tr>
             </tfoot>
             <tbody>
-            <!-- <?php  
+            <?php  
                 foreach ($rules as $item) {
             ?>
                 <tr>
@@ -54,13 +56,16 @@
                 <td><?= $item['fungsi_keanggotaan_2']; ?></td>
                 <td><?= $item['fungsi_keanggotaan_3']; ?></td>
                 <td><?= $item['fungsi_keanggotaan_4']; ?></td>
+                <td><?= $item['fungsi_keanggotaan_5']; ?></td>
                 <td><input name="<?= $item['nomor_rule']; ?>" type="number" min="0" step="any" value="<?= $item['cf_pakar']; ?>" required></td>
                 </tr>
-            <?php } ?> -->
+            <?php 
+            } 
+            ?>
             <a href="<?= base_url();?>rules?indication=lanas" class="btn btn-outline-secondary ml-1 mb-2">Lanas</a>
             <a href="<?= base_url();?>rules?indication=layubakteri" class="btn btn-success ml-1 mb-2">Layu Bakteri</a>
             <a href="<?= base_url();?>rules?indication=keriting" class="btn btn-outline-secondary ml-1 mb-2">Keriting</a>
-            <a href="<?= base_url();?>rules?indication=Lanas" class="btn btn-outline-secondary ml-1 mb-2">Mosaik</a>
+            <a href="<?= base_url();?>rules?indication=mosaik" class="btn btn-outline-secondary ml-1 mb-2">Mosaik</a>
           </tbody>
             </table>
         </div>

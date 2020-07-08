@@ -1,7 +1,4 @@
 
-
-  
-
 <div id="content-wrapper">
 
 <div class="container-fluid">
@@ -26,7 +23,7 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                <th>Nomor Rules</th>
+                <th style="width:5%">Nomor Rules</th>
                 <th>Gejala 1</th>
                 <th>Gejala 2</th>
                 <th>Gejala 3</th>

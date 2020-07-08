@@ -1,7 +1,4 @@
 
-
-  
-
 <div id="content-wrapper">
 
 <div class="container-fluid">
@@ -15,7 +12,7 @@
   </ol>
 
   <!-- DataTables Example -->
-  <form action="" method="post">
+  <form action="<?= base_url(); ?>rules/mosaik_update" method="post">
     <?= $this->session->flashdata('message'); ?>
     <div class="card mb-3">
       <div class="card-header">
@@ -26,7 +23,7 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                <th>Nomor Rules</th>
+                <th style="width:5%">Nomor Rules</th>
                 <th>Gejala 1</th>
                 <th>Gejala 2</th>
                 <th>Gejala 3</th>
@@ -45,7 +42,7 @@
                 </tr>
             </tfoot>
             <tbody>
-            <!-- <?php  
+            <?php  
                 foreach ($rules as $item) {
             ?>
                 <tr>
@@ -56,7 +53,7 @@
                 <td><?= $item['fungsi_keanggotaan_4']; ?></td>
                 <td><input name="<?= $item['nomor_rule']; ?>" type="number" min="0" step="any" value="<?= $item['cf_pakar']; ?>" required></td>
                 </tr>
-            <?php } ?> -->
+            <?php } ?>
             <a href="<?= base_url();?>rules?indication=lanas" class="btn btn-outline-secondary ml-1 mb-2">Lanas</a>
             <a href="<?= base_url();?>rules?indication=layubakteri" class="btn btn-outline-secondary ml-1 mb-2">Layu bakteri</a>
             <a href="<?= base_url();?>rules?indication=keriting" class="btn btn-outline-secondary ml-1 mb-2">Keriting</a>

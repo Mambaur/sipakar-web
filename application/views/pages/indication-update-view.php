@@ -8,7 +8,8 @@
     <li class="breadcrumb-item">
       <a href="#">Dashboard</a>
     </li>
-    <li class="breadcrumb-item active">Detail gejala</li>
+    <li class="breadcrumb-item active">Gejala</li>
+    <li class="breadcrumb-item active"><?= $gejala['nama_gejala']; ?></li>
   </ol>
   <div class="row">
     <div class="col-sm-6">

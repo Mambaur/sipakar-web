@@ -46,34 +46,82 @@ class Rules extends CI_Controller {
                 $this->db->update('rules_lanas', ['cf_pakar' => $cf_pakar]);
             }
         }
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Rule penyaki lanas berhasil diperbarui!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Rule penyakit lanas berhasil diperbarui!</div>');
         redirect ('rules?indication=lanas');
     }
 
     //Layu Bakteri Indication rules
     public function layubakteri(){
+        $data['rules'] = $this->db->get('rules_layu')->result_array();
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        $this->load->view('rules/rule-layu-view');
+        $this->load->view('rules/rule-layu-view', $data);
         $this->load->view('widgets/footer-widget');
+    }
+
+    public function layu_update(){
+        $data = $this->db->get('rules_layu')->result_array();
+        for ($i=0; $i < count($data); $i++) { 
+            $cf_pakar = $this->input->post($i+1);
+            if ($cf_pakar == $data[$i]['cf_pakar']){
+                //do nothing
+            }else{
+                $this->db->where('nomor_rule', $i+1);
+                $this->db->update('rules_layu', ['cf_pakar' => $cf_pakar]);
+            }
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Rule penyakit layu bakteri berhasil diperbarui!</div>');
+        redirect ('rules?indication=layubakteri');
     }
     
     //Keriting Indication rules
     public function keriting(){
+        $data['rules'] = $this->db->get('rules_keriting')->result_array();
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        $this->load->view('rules/rule-keriting-view');
+        $this->load->view('rules/rule-keriting-view', $data);
         $this->load->view('widgets/footer-widget');
+    }
+
+    public function keriting_update(){
+        $data = $this->db->get('rules_keriting')->result_array();
+        for ($i=0; $i < count($data); $i++) { 
+            $cf_pakar = $this->input->post($i+1);
+            if ($cf_pakar == $data[$i]['cf_pakar']){
+                //do nothing
+            }else{
+                $this->db->where('nomor_rule', $i+1);
+                $this->db->update('rules_keriting', ['cf_pakar' => $cf_pakar]);
+            }
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Rule penyakit keriting bakteri berhasil diperbarui!</div>');
+        redirect ('rules?indication=keriting');
     }
 
     //Keriting Indication rules
     public function mosaik(){
+        $data['rules'] = $this->db->get('rules_mosaik')->result_array();
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        $this->load->view('rules/rule-mosaik-view');
+        $this->load->view('rules/rule-mosaik-view', $data);
         $this->load->view('widgets/footer-widget');
+    }
+
+    public function mosaik_update(){
+        $data = $this->db->get('rules_keriting')->result_array();
+        for ($i=0; $i < count($data); $i++) { 
+            $cf_pakar = $this->input->post($i+1);
+            if ($cf_pakar == $data[$i]['cf_pakar']){
+                //do nothing
+            }else{
+                $this->db->where('nomor_rule', $i+1);
+                $this->db->update('rules_mosaik', ['cf_pakar' => $cf_pakar]);
+            }
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Rule penyakit mosaik bakteri berhasil diperbarui!</div>');
+        redirect ('rules?indication=mosaik');
     }
 }
