@@ -54,9 +54,9 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5"><?= count($this->db->get_where('user', ['role' => 'user'])->result_array()); ?> User aktif!</div>
+                <div class="mr-5"><?= count($this->db->get_where('user', ['role' => 'user'])->result_array()); ?> Pengguna aktif!</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>user">
                 <span class="float-left">Lihat Detail</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -70,7 +70,15 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5"><?= count($this->db->get('rules_lanas')->result_array()); ?> Total Rule!</div>
+                <div class="mr-5">
+                  <?php 
+                  $layu = count($this->db->get('rules_layu')->result_array());
+                  $lanas = count($this->db->get('rules_lanas')->result_array());
+                  $keriting = count($this->db->get('rules_keriting')->result_array());
+                  $mosaik = count($this->db->get('rules_mosaik')->result_array());
+                    
+                    echo $layu + $lanas + $keriting + $mosaik; 
+                  ?> Total Rule!</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>rules?indication=lanas">
                 <span class="float-left">Lihat Detail</span>

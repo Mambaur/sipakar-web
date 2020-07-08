@@ -54,50 +54,13 @@ function fungsiKeanggotaan($input,$tingkat){
 }
 
 function deffuzifikasi($fk, $penyakit){
-
-
-    // for ($j=0; $j < 3; $j++) {
-    //     for ($k=0; $k <3 ; $k++) { 
-    //         for ($l=0; $l < 3; $l++) { 
-    //             for ($m=0; $m < 3; $m++) { 
-    //                 $n++;
-                    
-    //                 if (!(($rule[0][$j] == 'KOSONG') || ($rule[1][$k] == 'KOSONG') || ($rule[2][$l] == 'KOSONG') || ($rule[3][$m] == 'KOSONG'))) {
-                    
-    //                     //Mencari nilai minimal setiap fungsikeanggotaan rule
-    //                     $min = min($rule[0][$j], $rule[1][$k], $rule[2][$l], $rule[3][$m]);
-                        
-    //                     $cf_pakar = $instance->db->get_where('rules_lanas', ['nomor_rule' => $n])->row_array();
-
-    //                     $resultRule[] = [
-    //                         'nomor_rule' => $n,
-    //                         'fungsi_keanggotaan_gejala_1' => $rule[0][$j],
-    //                         'fungsi_keanggotaan_gejala_2' => $rule[1][$k],
-    //                         'fungsi_keanggotaan_gejala_3' => $rule[2][$l],
-    //                         'fungsi_keanggotaan_gejala_4' => $rule[3][$m],
-    //                         'nilai_minimal' => $min,
-    //                         'cf_pakar' => (double)$cf_pakar['cf_pakar']
-    //                     ];
-                        
-    //                     $zi[] = $min * $cf_pakar['cf_pakar'];
-    //                     $pakar[]= $cf_pakar['cf_pakar'];
-    //                 }
-
-    //             }
-    //         }
-    //     }
-    // }
     if ($penyakit != 'layu') {
         $combination= combination_four_rules($fk, $penyakit);
     }else{
         $combination= combination_five_rules($fk, $penyakit);
     }
-    // echo json_encode($combination);
-    // die; 
+
     //Menghitung rumus deffuzifikasi
-    // $zdeff = array_sum($zi);
-    // $zp = array_sum($pakar);
-    
     $zdeff = array_sum($combination['zi']);
     $zp = array_sum($combination['pakar']);
 
@@ -115,6 +78,7 @@ function deffuzifikasi($fk, $penyakit){
 }
 
 function certainty($z, $pakar, $resultRule, $penyakit){
+    $instance = get_instance();
     for ($i=0; $i < count($pakar); $i++) { 
         $CFhe[] = $z * $pakar[$i];
     }
@@ -133,6 +97,16 @@ function certainty($z, $pakar, $resultRule, $penyakit){
     }else if($penyakit == 'rules_mosaik'){
         $penyakit = 'mosaik';
     }
+
+    $persentase = $CFcombine * 100;
+    $datainsert = [
+        'z_deffuzifikasi' => $z,
+        'nilai_cf' => $CFcombine,
+        'persentase' => (int)$persentase,
+        'penyakit' => $penyakit,
+        'role_identifikasi' => get_id()
+    ];
+    $instance->db->insert('identifikasi_detail', $datainsert);
 
     $result =[
         'status' => 1,
@@ -246,5 +220,26 @@ function combination_five_rules($fk, $penyakit){
         'pakar' => $pakar,
         'penyakit' => $penyakit
     ];
+
     return $data;
+}
+
+function get_id(){
+    $instance = get_instance();
+    $instance->db->select('RIGHT(identifikasi.id_identifikasi, 4) as kode', FALSE);
+    $instance->db->order_by('id_identifikasi','DESC');    
+    $instance->db->limit(1);    
+    $query = $instance->db->get('identifikasi');     
+    if($query->num_rows() <> 0){      
+  
+     $data = $query->row();      
+     $kode = intval($data->kode) + 1;    
+    }
+    else {      
+     //jika kode belum ada      
+     $kode = 1;    
+    }
+    $kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT); 
+    $kodejadi = "DT".$kodemax;  
+    return $kodejadi;
 }

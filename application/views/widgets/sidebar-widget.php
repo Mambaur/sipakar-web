@@ -37,8 +37,13 @@
           <span>Tentang tembakau</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>account">
+        <a class="nav-link" href="<?= base_url(); ?>user">
           <i class="fas fa-fw fa-user"></i>
+          <span>Pengguna</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>account">
+          <i class="fas fa-fw fa-cog"></i>
           <span>Akun</span></a>
       </li>
       <li class="nav-item">
