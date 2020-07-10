@@ -114,7 +114,8 @@ function certainty($z, $pakar, $resultRule, $penyakit){
         'rule' =>$resultRule,
         'nilai_z' => $z,
         'cf_he' => $CFhe,
-        'hasil_kombinasi' => $CFcombine      
+        'hasil_kombinasi' => $CFcombine,
+        'persentase' => $persentase      
     ];
     return $result;
 }
