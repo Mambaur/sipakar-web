@@ -64,6 +64,8 @@ class Dashboard extends CI_Controller {
             $this->load->view('widgets/sidebar-widget');
             $this->load->view('dashboard-identification-view', $result);
             $this->load->view('widgets/footer-widget');
+        }else if($this->input->get('detail') == 'penanganan'){
+            $this->penanganan();
         }else{
             $data['gejala'] = $this->db->get('gejala')->result_array();
             $this->load->view('widgets/header-widget');
@@ -71,6 +73,50 @@ class Dashboard extends CI_Controller {
             $this->load->view('widgets/sidebar-widget');
             $this->load->view('dashboard-view', $data);
             $this->load->view('widgets/footer-widget');
+        }
+    }
+
+    public function penanganan(){
+        if($this->input->get('identifikasi') && $this->input->get('penyakit')){
+            $this->db->join('identifikasi_detail', 'penyakit.nama_penyakit = identifikasi_detail.penyakit');
+            $this->db->join('identifikasi', 'identifikasi.id_identifikasi = identifikasi_detail.role_identifikasi');
+            $this->db->join('user', 'identifikasi.role_user = user.email');
+            $this->db->where('nama_penyakit', $this->input->get('penyakit'));
+            $this->db->where('id_identifikasi', $this->input->get('identifikasi'));
+            $this->db->where('email', $this->session->userdata('email'));
+            $data['penyakit'] = $this->db->get('penyakit')->result_array();
+            $this->load->view('widgets/header-widget');
+            $this->load->view('widgets/navbar-widget');
+            $this->load->view('widgets/sidebar-widget');
+            $this->load->view('dashboard-penanganan-view', $data);
+            $this->load->view('widgets/footer-widget');
+        }else if($this->input->get('identifikasi') && $this->input->get('user')){
+            $this->db->join('identifikasi_detail', 'penyakit.nama_penyakit = identifikasi_detail.penyakit');
+            $this->db->join('identifikasi', 'identifikasi.id_identifikasi = identifikasi_detail.role_identifikasi');
+            $this->db->join('user', 'identifikasi.role_user = user.email');
+            $this->db->where('role_user', $this->input->get('user'));
+            $this->db->where('id_identifikasi', $this->input->get('identifikasi'));
+            $data['penyakit'] = $this->db->get('penyakit')->result_array();
+            $this->load->view('widgets/header-widget');
+            $this->load->view('widgets/navbar-widget');
+            $this->load->view('widgets/sidebar-widget');
+            $this->load->view('dashboard-penanganan-view', $data);
+            $this->load->view('widgets/footer-widget');
+
+        }else if($this->input->get('identifikasi')){
+            $this->db->join('identifikasi_detail', 'penyakit.nama_penyakit = identifikasi_detail.penyakit');
+            $this->db->join('identifikasi', 'identifikasi.id_identifikasi = identifikasi_detail.role_identifikasi');
+            $this->db->join('user', 'identifikasi.role_user = user.email');
+            $this->db->where('id_identifikasi', $this->input->get('identifikasi'));
+            $this->db->where('email', $this->session->userdata('email'));
+            $data['penyakit'] = $this->db->get('penyakit')->result_array();
+            $this->load->view('widgets/header-widget');
+            $this->load->view('widgets/navbar-widget');
+            $this->load->view('widgets/sidebar-widget');
+            $this->load->view('dashboard-penanganan-view', $data);
+            $this->load->view('widgets/footer-widget');
+        }else{
+            return('dashboard');
         }
     }
 }

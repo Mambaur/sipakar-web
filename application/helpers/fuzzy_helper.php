@@ -99,6 +99,18 @@ function certainty($z, $pakar, $resultRule, $penyakit){
     }
 
     $persentase = $CFcombine * 100;
+
+    $result =[
+        'status' => 1,
+        'penyakit' => $penyakit,
+        'rule' =>$resultRule,
+        'nilai_z' => $z,
+        'cf_he' => $CFhe,
+        'hasil_kombinasi' => $CFcombine,
+        'persentase' => $persentase,
+        'id_identifikasi' => get_id()      
+    ];
+
     $datainsert = [
         'z_deffuzifikasi' => $z,
         'nilai_cf' => $CFcombine,
@@ -108,15 +120,6 @@ function certainty($z, $pakar, $resultRule, $penyakit){
     ];
     $instance->db->insert('identifikasi_detail', $datainsert);
 
-    $result =[
-        'status' => 1,
-        'penyakit' => $penyakit,
-        'rule' =>$resultRule,
-        'nilai_z' => $z,
-        'cf_he' => $CFhe,
-        'hasil_kombinasi' => $CFcombine,
-        'persentase' => $persentase      
-    ];
     return $result;
 }
 

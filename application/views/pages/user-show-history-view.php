@@ -26,7 +26,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title"><?= date('l', strtotime($item['tanggal'])).', '.$item['tanggal']; ?></h4>
-                    <p class="card-text"><?= $item['id_identifikasi']; ?></p>
+                    <p class="card-text"><?= $item['id_identifikasi']; ?> | <a href="<?= base_url('dashboard?detail=penanganan&identifikasi='. $item['id_identifikasi'].'&user='.$item['role_user'])?>" class="btn btn-primary">Penanganan</a></p>
                 </div>
                 <ul class="list-group list-group-flush">
                 <?php

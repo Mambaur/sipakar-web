@@ -20,6 +20,7 @@ if ($hasil[0]['status']!=1 && $hasil[1]['status']!=1 && $hasil[2]['status']!=1 &
     foreach ($hasil as $item) {
         if ($item['status'] == 1) {             
             $persentase = $item['hasil_kombinasi'] * 100;
+            $penanganan = $item['id_identifikasi'];
         ?>
             <div class="card mb-3" style="border: 1px solid #218838;">
                 <div class="card-header" style="background-color:#218838;">
@@ -37,8 +38,18 @@ if ($hasil[0]['status']!=1 && $hasil[1]['status']!=1 && $hasil[2]['status']!=1 &
                                     <hr>
                                     <strong>Penanganan</strong>
                                     <p>
-                                        Penanaganan yang dapat dilakukan jika tembakau mengalami penyakit ini adalah dengan memberikan pupuk sesuai dengan takaran, serta hindari kelembaban yang tinggi...
-                                    <a href="" class="badge badge-secondary">Selengkapnya</a>
+                                        <?php
+                                            $data = $this->db->get_where('penyakit', ['nama_penyakit' => $item['penyakit']])->row_array();
+                                            $string = $data['penanganan'];
+                                            if (strlen($string) > 150) {
+                                            $stringCut = substr($string, 0, 150);
+                                            $endPoint = strrpos($stringCut, ' ');
+                                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                                            $string .= '...';
+                                            }    
+                                            echo $string;
+                                        ?>
+                                    <a href="<?= base_url('dashboard?detail=penanganan&identifikasi='. $item['id_identifikasi'].'&penyakit='.$item['penyakit'])?>" class="badge badge-secondary">Selengkapnya</a>
                                     </p>
                                 </div>
                                 <div class="col-sm-6">
@@ -97,6 +108,7 @@ if ($hasil[0]['status']!=1 && $hasil[1]['status']!=1 && $hasil[2]['status']!=1 &
     <div class="container text-center">
         <div class="container">
             <a href="<?= base_url();?>dashboard" style="border-radius:40px;" class="btn btn-success py-2 px-5 mb-4"><i class="fas fa-fw fa-backward"></i> <strong>Kembali</strong></a>
+            <a href="<?= base_url('dashboard?detail=penanganan&identifikasi='. $penanganan)?>" style="border-radius:40px;" class="btn btn-success py-2 px-5 mb-4"><strong>Penanganan</strong> <i class="fas fa-fw fa-forward"></i></a>
         </div>
     </div>
 </div>
