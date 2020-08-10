@@ -89,13 +89,13 @@ function certainty($z, $pakar, $resultRule, $penyakit){
     }
 
     if ($penyakit == 'rules_lanas') {
-        $penyakit = 'lanas';
+        $penyakit = 'Lanas';
     }else if($penyakit == 'rules_layu'){
-        $penyakit = 'layu';
+        $penyakit = 'Layu Bakteri';
     }else if($penyakit == 'rules_keriting'){
-        $penyakit = 'keriting';
+        $penyakit = 'Keriting';
     }else if($penyakit == 'rules_mosaik'){
-        $penyakit = 'mosaik';
+        $penyakit = 'Mosaik Tembakau';
     }
 
     $persentase = $CFcombine * 100;
@@ -108,7 +108,8 @@ function certainty($z, $pakar, $resultRule, $penyakit){
         'cf_he' => $CFhe,
         'hasil_kombinasi' => $CFcombine,
         'persentase' => $persentase,
-        'id_identifikasi' => get_id()      
+        'id_identifikasi' => get_id(),
+        'detail_penyakit' => $instance->db->get_where('penyakit', ['nama_penyakit' => $penyakit])->row_array()      
     ];
 
     $datainsert = [

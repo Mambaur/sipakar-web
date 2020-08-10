@@ -28,7 +28,7 @@ class Tembakau extends CI_Controller {
         $this->load->view('widgets/header-widget');
         $this->load->view('widgets/navbar-widget');
         $this->load->view('widgets/sidebar-widget');
-        // $this->load->view('account-view', $data);
+        $this->load->view('pages/info-view');
         $this->load->view('widgets/footer-widget');
     }
 

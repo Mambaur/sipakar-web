@@ -43,7 +43,7 @@
         </div>
        
 
-        <div class="col-sm-6">
+        <!-- <div class="col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-fw fa-lock"></i>
@@ -69,7 +69,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
         
     </div>
  
