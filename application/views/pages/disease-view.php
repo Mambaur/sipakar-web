@@ -36,7 +36,7 @@
                                 <h4 class="card-title"><?= $item['nama_penyakit']; ?></h4>
                                 <p class="card-text"><?= $string; ?></p>
                             </div>
-                            <a href="<?= base_url('tembakau?link=penyakit&action=update&idpenyakit=').$item['idpenyakit'];?>" style="border-radius:40px;height:20%;" class="btn btn-primary">Lihat Selengkapnya</a>
+                            <a href="<?= base_url('tembakau?link=penyakit&action=update&idpenyakit=').$item['idpenyakit'];?>" style="border-radius:40px;height:45%;" class="btn btn-primary">Lihat Selengkapnya</a>
                         </div>
                     </div>
                 </div>

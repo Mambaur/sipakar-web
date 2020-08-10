@@ -28,19 +28,16 @@
       <?= $this->session->flashdata('message'); ?>
         <form action="<?= base_url();?>auth/login" method="post">
           <div class="form-group">
-            <div class="form-label-group">
               Username :
               <input type="text" name="email" class="form-control" value="<?= set_value('email'); ?>" placeholder="Email address">
               <!-- <label for="inputEmail">Email address</label> -->
               <?= form_error('email','<small class="text-danger pl-3">','</small>'); ?>
-            </div>
+            
           </div>
           <div class="form-group">
             Password :
-            <div class="form-label-group">
               <input type="password" name="password" class="form-control" placeholder="Password">
               <!-- <label for="inputPassword">Password</label> -->
-            </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit">Login</button>
           <!-- <a class="btn btn-primary btn-block" href="index.html">Login</a> -->
