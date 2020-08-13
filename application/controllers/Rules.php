@@ -111,7 +111,7 @@ class Rules extends CI_Controller {
     }
 
     public function mosaik_update(){
-        $data = $this->db->get('rules_keriting')->result_array();
+        $data = $this->db->get('rules_mosaik')->result_array();
         for ($i=0; $i < count($data); $i++) { 
             $cf_pakar = $this->input->post($i+1);
             if ($cf_pakar == $data[$i]['cf_pakar']){
