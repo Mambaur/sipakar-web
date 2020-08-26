@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//last fuzzy commit
 class Dashboard extends CI_Controller {
     public function __construct(){
         parent::__construct();
@@ -39,7 +39,7 @@ class Dashboard extends CI_Controller {
                 $this->input->post('G019'),
             ];
 
-            // echo lanas_identification($data);
+            // echo lanas_identification($data); 
             $result['hasil'] = [
                 json_decode(identification($data_lanas,'rules_lanas'), TRUE),
                 json_decode(identification($data_layu,'rules_layu'), TRUE),
