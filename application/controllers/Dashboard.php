@@ -12,39 +12,36 @@ class Dashboard extends CI_Controller {
     public function index(){
         if ($this->input->get('start') == 'identification') {
             $data_lanas = [
-                $this->input->post('G001'),
-                $this->input->post('G002'),
-                $this->input->post('G003'),
-                $this->input->post('G004'),
+                $this->input->post('G001')/100,
+                $this->input->post('G002')/100,
+                $this->input->post('G003')/100,
+                $this->input->post('G004')/100,
             ];
             $data_layu = [
-                $this->input->post('G005'),
-                $this->input->post('G006'),
-                $this->input->post('G007'),
-                $this->input->post('G008'),
-                $this->input->post('G009'),
+                $this->input->post('G005')/100,
+                $this->input->post('G006')/100,
+                $this->input->post('G007')/100,
+                $this->input->post('G008')/100,
+                $this->input->post('G009')/100,
             ];
             $data_keriting = [
-                $this->input->post('G010'),
-                $this->input->post('G011'),
-                $this->input->post('G012'),
-                $this->input->post('G013'),
-                $this->input->post('G014'),
+                $this->input->post('G010')/100,
+                $this->input->post('G011')/100,
+                $this->input->post('G012')/100,
+                $this->input->post('G013')/100,
             ];
             $data_mosaik = [
-                $this->input->post('G015'),
-                $this->input->post('G016'),
-                $this->input->post('G017'),
-                $this->input->post('G018'),
-                $this->input->post('G019'),
+                $this->input->post('G014')/100,
+                $this->input->post('G015')/100,
+                $this->input->post('G016')/100,
+                $this->input->post('G017')/100,
             ];
 
-            // echo lanas_identification($data); 
             $result['hasil'] = [
-                json_decode(identification($data_lanas,'rules_lanas'), TRUE),
-                json_decode(identification($data_layu,'rules_layu'), TRUE),
-                json_decode(identification($data_keriting,'rules_keriting'), TRUE),
-                json_decode(identification($data_mosaik,'rules_mosaik'), TRUE),
+                identification($data_lanas,1),
+                identification($data_layu,2),
+                identification($data_keriting,3),
+                identification($data_mosaik,4),
             ];
 
             if ($result['hasil'][0]['status']!=1 && $result['hasil'][1]['status']!=1 && $result['hasil'][2]['status']!=1 && $result['hasil'][3]['status']!=1) {
@@ -58,7 +55,6 @@ class Dashboard extends CI_Controller {
                 $this->db->insert('identifikasi', $insertdb);
             }
             
-            // echo json_encode($result);
             $this->load->view('widgets/header-widget');
             $this->load->view('widgets/navbar-widget');
             $this->load->view('widgets/sidebar-widget');
@@ -78,7 +74,7 @@ class Dashboard extends CI_Controller {
 
     public function penanganan(){
         if($this->input->get('identifikasi') && $this->input->get('penyakit')){
-            $this->db->join('identifikasi_detail', 'penyakit.nama_penyakit = identifikasi_detail.penyakit');
+            $this->db->join('identifikasi_detail', 'penyakit.idpenyakit = identifikasi_detail.role_penyakit');
             $this->db->join('identifikasi', 'identifikasi.id_identifikasi = identifikasi_detail.role_identifikasi');
             $this->db->join('user', 'identifikasi.role_user = user.email');
             $this->db->where('nama_penyakit', $this->input->get('penyakit'));
@@ -91,7 +87,7 @@ class Dashboard extends CI_Controller {
             $this->load->view('dashboard-penanganan-view', $data);
             $this->load->view('widgets/footer-widget');
         }else if($this->input->get('identifikasi') && $this->input->get('user')){
-            $this->db->join('identifikasi_detail', 'penyakit.nama_penyakit = identifikasi_detail.penyakit');
+            $this->db->join('identifikasi_detail', 'penyakit.idpenyakit = identifikasi_detail.role_penyakit');
             $this->db->join('identifikasi', 'identifikasi.id_identifikasi = identifikasi_detail.role_identifikasi');
             $this->db->join('user', 'identifikasi.role_user = user.email');
             $this->db->where('role_user', $this->input->get('user'));
@@ -104,7 +100,7 @@ class Dashboard extends CI_Controller {
             $this->load->view('widgets/footer-widget');
 
         }else if($this->input->get('identifikasi')){
-            $this->db->join('identifikasi_detail', 'penyakit.nama_penyakit = identifikasi_detail.penyakit');
+            $this->db->join('identifikasi_detail', 'penyakit.idpenyakit = identifikasi_detail.role_penyakit');
             $this->db->join('identifikasi', 'identifikasi.id_identifikasi = identifikasi_detail.role_identifikasi');
             $this->db->join('user', 'identifikasi.role_user = user.email');
             $this->db->where('id_identifikasi', $this->input->get('identifikasi'));

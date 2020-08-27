@@ -72,13 +72,9 @@
                 </div>
                 <div class="mr-5">
                   <?php 
-                  $layu = count($this->db->get('rules_layu')->result_array());
-                  $lanas = count($this->db->get('rules_lanas')->result_array());
-                  $keriting = count($this->db->get('rules_keriting')->result_array());
-                  $mosaik = count($this->db->get('rules_mosaik')->result_array());
-                    
-                    echo $layu + $lanas + $keriting + $mosaik; 
-                  ?> Total Rule!</div>
+                  $identifikasi = count($this->db->get('identifikasi')->result_array());
+                    echo $identifikasi; 
+                  ?> Total Identifikasi!</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>rules?indication=lanas">
                 <span class="float-left">Lihat Detail</span>

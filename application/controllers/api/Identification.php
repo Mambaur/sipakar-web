@@ -31,21 +31,14 @@ class Identification extends CI_Controller {
                 $this->input->post('gejala17'),
             ];
 
-            $data = [
-                'lanas' => $data_lanas,
-                'layu' => $data_layu,
-                'keriting' => $data_keriting,
-                'mosaik' => $data_mosaik,
-            ];
-
             // echo json_encode($data);
 
             // echo lanas_identification($data);
             $result['hasil'] = [
-                json_decode(identification($data_lanas,'rules_lanas'), TRUE),
-                json_decode(identification($data_layu,'rules_layu'), TRUE),
-                json_decode(identification($data_keriting,'rules_keriting'), TRUE),
-                json_decode(identification($data_mosaik,'rules_mosaik'), TRUE),
+                json_decode(identification($data_lanas,1), TRUE),
+                json_decode(identification($data_layu,2), TRUE),
+                json_decode(identification($data_keriting,3), TRUE),
+                json_decode(identification($data_mosaik,4), TRUE),
             ];
 
             if ($result['hasil'][0]['status']!=1 && $result['hasil'][1]['status']!=1 && $result['hasil'][2]['status']!=1 && $result['hasil'][3]['status']!=1) {
@@ -62,23 +55,4 @@ class Identification extends CI_Controller {
             echo json_encode($result);
         }
     }
-
-    // public function getGejala(){
-    //     if ($this->input->server('REQUEST_METHOD') == 'GET'){
-    //         if ($this->db->get('gejala')->result_array()) {
-    //            $data = [
-    //                 'status' => 1,
-    //                 'responseText' => 'list indication',
-    //                 'responseBody' => $this->db->get('gejala')->result_array(),
-    //             ];
-    //             echo json_encode($data);
-    //         }else{
-    //             $data = [
-    //                 'status' => 0,
-    //                 'message' => 'Get indication data error'
-    //             ];
-    //             echo json_encode($data);
-    //         }
-    //     }
-    // }
 }

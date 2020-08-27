@@ -8,18 +8,10 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url();?>rules?indication=rule">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Rules</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="<?= base_url();?>rules?indication=lanas">Lanas</a>
-          <a class="dropdown-item" href="<?= base_url();?>rules?indication=layubakteri">Layu Bakteri</a>
-          <a class="dropdown-item" href="<?= base_url();?>rules?indication=keriting">Keriting</a>
-          <a class="dropdown-item" href="<?= base_url();?>rules?indication=mosaik">Mosaik</a>
-          <div class="dropdown-divider"></div>
-        </div>
+          <span>Rules</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>tembakau?link=gejala">
